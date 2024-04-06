@@ -3,7 +3,7 @@ import { paths } from '@/paths';
 
 export const navItems = [
   { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'chart-pie' },
-  { key: 'papers', title: 'Papers', href: paths.dashboard.overview, icon: 'chart-pie' },
+  { key: 'papers', title: 'Papers', href: paths.dashboard.papers, icon: 'chart-pie' },
   { key: 'authors', title: 'Authors', href: paths.dashboard.authors, icon: 'users' },
   { key: 'venues', title: 'Venues', href: paths.dashboard.integrations, icon: 'plugs-connected' },
   // { key: 'settings', title: 'Settings', href: paths.dashboard.settings, icon: 'gear-six' },
