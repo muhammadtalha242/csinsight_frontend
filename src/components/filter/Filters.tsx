@@ -74,15 +74,6 @@ export function Filters(): React.JSX.Element {
         </DrawerHeader>
         <Divider />
         <Box sx={{ padding: '16px' }}>
-          {/* <Selectf
-            value={options[0].label}
-            // onChange={handleChange}
-            sx={{ marginBottom: '16px' }}
-          >
-            <MenuItem value="option1">Option 1</MenuItem>
-            <MenuItem value="option2">Option 2</MenuItem>
-            <MenuItem value="option3">Option 3</MenuItem>
-          </Selectf> */}
           <Select
             inputLabel="Authors"
             options={options}

@@ -68,5 +68,6 @@ module.exports = {
     'react/function-component-definition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-no-useless-fragment': 'off',
+    '@typescript-eslint/naming-convention': 'off',
   },
 };
