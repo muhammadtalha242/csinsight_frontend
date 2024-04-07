@@ -7,8 +7,8 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { styled } from '@mui/material/styles';
 
 import { ApplicationContext } from '@/contexts/app.context';
-import { MainNav } from '@/components/dashboard/layout/main-nav';
-import { SideNav } from '@/components/dashboard/layout/side-nav';
+import { MainNav } from '@/components/dashboard/layout/nav/main-nav';
+import { Filters } from '@/components/filter/Filters';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -67,7 +67,7 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
             <Container sx={{ py: 'var(--MainNav-height)', minWidth: '100%' }}>{children}</Container>
           </Main>
         </Box>
-        <SideNav />
+        <Filters />
       </Box>
     </>
   );
