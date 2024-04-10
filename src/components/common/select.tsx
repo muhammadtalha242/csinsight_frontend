@@ -1,14 +1,15 @@
-/* eslint-disable react/function-component-definition */
-// Disable the eslint rule for function component definition to avoid unnecessary warnings.
 import * as React from 'react';
-import { Autocomplete, CircularProgress, TextField } from '@mui/material';
+import { DEBOUNCE_DELAY_AUTOCOMPLETE, type AUTOCOMPLETE_ROUTES } from '@/constants/const';
+import { useAutocomplete } from '@/services/autocomplete';
+import { Autocomplete, CircularProgress, debounce, TextField } from '@mui/material';
 
-// import { AUTOCOMPLETE_ROUTES } from '../constants/consts';
-// import { useAutocomplete } from '../services/autocomplete';
-
+interface Option {
+  label: string;
+  value: string;
+}
 interface SelectProps {
-  route?: string;
-  options: unknown[];
+  route: AUTOCOMPLETE_ROUTES;
+  options: Option[];
   multiple?: boolean;
   inputLabel: string;
   onChange?: (selectedOptions: string[] | string | null) => void; // Updated type to match the Autocomplete's expectation
@@ -16,17 +17,15 @@ interface SelectProps {
 
 const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, onChange }) => {
   const [, setSelectedOption] = React.useState<string[]>([]);
-  const [inputValue, setInputValue] = React.useState('');
-  //   const { data, isFetching } = useAutocomplete({ route, inputValue });
-
-  const handleChange = (_: React.SyntheticEvent, value: string[] | string | null) => {
-    setInputValue(inputValue);
+  const [inputValue, setInputValue] = React.useState<string>('');
+  const { data, isFetching } = useAutocomplete({ route, inputValue });
+  const handleChange = debounce(async (_: React.SyntheticEvent, value: Option[] | Option | null) => {
     let selectedValues: string[] | string | null = null;
 
     if (Array.isArray(value)) {
-      selectedValues = value.map((option) => option);
+      selectedValues = value.map((option) => option.value);
     } else if (value) {
-      selectedValues = value;
+      selectedValues = value.value;
     }
 
     setSelectedOption(Array.isArray(selectedValues) ? selectedValues : selectedValues ? [selectedValues] : []);
@@ -34,21 +33,21 @@ const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, o
     if (onChange) {
       onChange(selectedValues);
     }
-  };
+  }, DEBOUNCE_DELAY_AUTOCOMPLETE);
 
   return (
     <Autocomplete
       multiple={multiple}
       id="tags-outlined"
-      options={options}
-      getOptionLabel={(option) => option as string}
+      options={data || options}
+      getOptionLabel={(option) => option.value}
       filterSelectedOptions
       loading={false}
       onInputChange={(_, newInputValue) => {
         setInputValue(newInputValue.trim());
       }}
-      renderOption={(props) => <li {...props}>TEST</li>}
-      //   onChange={handleChange}
+      renderOption={(props, option) => <li {...props}>{option.value}</li>}
+      onChange={handleChange}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -57,9 +56,7 @@ const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, o
             ...params.InputProps,
             endAdornment: (
               <>
-                {/* {false ? (
-                                    <CircularProgress color="inherit" size={20} />
-                                ) : null} */}
+                {isFetching ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </>
             ),
