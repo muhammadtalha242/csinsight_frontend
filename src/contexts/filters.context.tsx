@@ -5,7 +5,7 @@ import { ACCESS_TYPE_OPEN, metrics } from '@/constants/const';
 
 import { type Filter } from '@/types/filters';
 
-const intialFilter = {
+export const intialFilter = {
   yearStart: '1960',
   yearEnd: '',
   citationsMin: '',
@@ -60,7 +60,7 @@ const filterReducer = (state: IState, action: Actions): IState => {
   }
 };
 
-export const SetFilteres = (dispatch: React.Dispatch<Actions> | undefined) => (params: { filters: Filter }) => {
+export const SetFilters = (dispatch: React.Dispatch<Actions> | undefined) => (params: { filters: Filter }) => {
   if (dispatch)
     dispatch({
       type: ACTION_TYPES.SET_FILTER,
@@ -68,7 +68,7 @@ export const SetFilteres = (dispatch: React.Dispatch<Actions> | undefined) => (p
     });
 };
 
-export const SetOldFilteres = (dispatch: React.Dispatch<Actions> | undefined) => (params: { filters: Filter }) => {
+export const SetOldFilters = (dispatch: React.Dispatch<Actions> | undefined) => (params: { filters: Filter }) => {
   if (dispatch)
     dispatch({
       type: ACTION_TYPES.SET_OLD_FILTER,
