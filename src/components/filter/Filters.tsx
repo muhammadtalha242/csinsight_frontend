@@ -1,15 +1,21 @@
 'use client';
 
 import * as React from 'react';
+import { ACCESS_TYPE, FIELDS_OF_STUDY, TYPES_OF_PAPER } from '@/constants/const';
+import { CheckCircleTwoTone } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Drawer, IconButton, Typography } from '@mui/material';
+import { Button, Drawer, IconButton, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled, useTheme } from '@mui/material/styles';
 
+import { type Filter } from '@/types/filters';
 import { ApplicationContext, SetSideNavCollapsed } from '@/contexts/app.context';
+import { ClearFilter, FilterContext, intialFilter, SetFilters as setFiltersContext } from '@/contexts/filters.context';
 import Select from '@/components/common/select';
+
+import FilterRange from '../common/inputRange';
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -19,13 +25,38 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   height: 'var(--MainNav-height)',
   justifyContent: 'flex-start',
 }));
+
 export function Filters(): React.JSX.Element {
   const {
     state: { isSideNavOpen },
     dispatch: applicatonDispatch,
   } = React.useContext(ApplicationContext);
   const theme = useTheme();
-  const options = [{ label: 'Option 1' }, { label: 'Option 2' }, { label: 'Option 3' }];
+  const { state: filterState, dispatch: filterDispatch } = React.useContext(FilterContext);
+  const [filter, setFilter] = React.useState<Filter>(intialFilter);
+
+  const handleSelectChange =
+    (
+      name:
+        | 'authorIds'
+        | 'venueIds'
+        | 'typesOfPaper'
+        | 'fieldsOfStudy'
+        | 'publishers'
+        | 'metric'
+        | 'accessType'
+        | 'yearStart'
+        | 'yearEnd'
+    ) =>
+    (selectedOptions: string[] | string | null) => {
+      setFilter((prev) => ({ ...prev, [name]: selectedOptions }));
+    };
+
+  const rest = () => {
+    ClearFilter(filterDispatch)();
+    setFilter(intialFilter);
+  };
+
   return (
     <Box>
       <Drawer
@@ -74,12 +105,76 @@ export function Filters(): React.JSX.Element {
         </DrawerHeader>
         <Divider />
         <Box sx={{ padding: '16px' }}>
-          <Select
-            inputLabel="Authors"
-            options={options}
-            // getOptionLabel={(option) => option.label}
-            // renderInput={(params) => <TextField {...params} label="Authors" />}
+          <Box sx={{ marginBottom: '16px' }}>
+            <Select
+              route="authors"
+              options={[]}
+              inputLabel="Authors"
+              onChange={handleSelectChange('authorIds')}
+              multiple
+            />
+          </Box>
+          <Box sx={{ marginBottom: '16px' }}>
+            <Select
+              route="venues"
+              inputLabel="Venues"
+              multiple
+              options={[]}
+              onChange={handleSelectChange('venueIds')}
+            />
+          </Box>
+
+          <Box sx={{ marginBottom: '16px' }}>
+            <Select
+              route="fieldsOfStudy"
+              inputLabel="Field of Study"
+              multiple
+              onChange={handleSelectChange('fieldsOfStudy')}
+              options={FIELDS_OF_STUDY.map((field) => ({ label: field, value: field }))}
+            />
+          </Box>
+          <Box sx={{ marginBottom: '16px' }}>
+            <Select
+              route="typesOfPaper"
+              inputLabel="Types of papers"
+              multiple
+              onChange={handleSelectChange('typesOfPaper')}
+              options={TYPES_OF_PAPER.map((type) => ({ label: type, value: type }))}
+            />
+          </Box>
+          <Box sx={{ marginBottom: '16px' }}>
+            <Select
+              route="accessTypes"
+              inputLabel="Access Type"
+              multiple
+              onChange={handleSelectChange('accessType')}
+              options={ACCESS_TYPE.map((type) => ({ label: type, value: type }))}
+            />
+          </Box>
+          <FilterRange
+            label="Year of publication"
+            helpTooltip={`Filter by the year of publication. Inclusive the given min and max values.
+      Papers without a year of publication are aggregated into Others in the barchart, if no filter is selected.`}
+            labelStart="From"
+            labelEnd="To"
+            valueStart={filter.yearStart}
+            valueEnd={filter.yearEnd}
+            setValueStart={handleSelectChange('yearStart')}
+            setValueEnd={handleSelectChange('yearEnd')}
           />
+        </Box>
+        <Divider />
+        <Box marginTop={8} display="flex" justifyContent="space-around">
+          <Button
+            variant="contained"
+            startIcon={<CheckCircleTwoTone />}
+            onClick={() => setFiltersContext(filterDispatch)({ filters: filter })}
+          >
+            Apply
+          </Button>
+          <Button variant="contained" startIcon={<CheckCircleTwoTone />} onClick={rest}>
+            Cancle
+          </Button>
         </Box>
       </Drawer>
     </Box>
