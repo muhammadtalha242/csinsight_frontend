@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { LinearProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -20,9 +21,10 @@ export interface LineChartProps {
   sx?: SxProps;
   title: string;
   xAxisCategories: string[];
+  isLoading: boolean;
 }
 
-export function LineChart({ chartSeries, sx, title, xAxisCategories }: LineChartProps): React.JSX.Element {
+export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }: LineChartProps): React.JSX.Element {
   const chartOptions = useChartOptions(xAxisCategories);
 
   return (
@@ -35,15 +37,21 @@ export function LineChart({ chartSeries, sx, title, xAxisCategories }: LineChart
         }
         title={title}
       />
-      <CardContent>
-        <Chart height={350} options={chartOptions} series={chartSeries} type="line" width="100%" />
-      </CardContent>
-      <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small">
-          Overview
-        </Button>
-      </CardActions>
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <CardContent>
+            <Chart height={350} options={chartOptions} series={chartSeries} type="line" width="100%" />
+          </CardContent>
+          <Divider />
+          <CardActions sx={{ justifyContent: 'flex-end' }}>
+            <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small">
+              Overview
+            </Button>
+          </CardActions>
+        </>
+      )}
     </Card>
   );
 }
