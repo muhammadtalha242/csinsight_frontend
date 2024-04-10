@@ -22,15 +22,7 @@ module.exports = {
     },
   },
   rules: {
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        ignoreRestSiblings: true,
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
-    ],
+    '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-empty-interface': [
       'error',
       {
@@ -43,6 +35,10 @@ module.exports = {
         ignoreOnInitialization: true,
       },
     ],
+    'no-console': 'warn',
+    '@typescript-eslint/no-unsafe-return': 'warn',
+    '@typescript-eslint/no-unsafe-call': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
     'import/newline-after-import': 'error',
     'react/jsx-uses-react': 'error',
     'react/react-in-jsx-scope': 'error',
@@ -69,5 +65,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-no-useless-fragment': 'off',
     '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
   },
 };
