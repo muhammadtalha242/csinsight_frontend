@@ -47,6 +47,8 @@ export function Filters(): React.JSX.Element {
         | 'accessType'
         | 'yearStart'
         | 'yearEnd'
+        | 'citationsMin'
+        | 'citationsMax'
     ) =>
     (selectedOptions: string[] | string | null) => {
       setFilter((prev) => ({ ...prev, [name]: selectedOptions }));
@@ -105,6 +107,18 @@ export function Filters(): React.JSX.Element {
         </DrawerHeader>
         <Divider />
         <Box sx={{ padding: '16px' }}>
+          <Box sx={{ marginBottom: '16px' }}>
+            <FilterRange
+              label="Citations Count"
+              helpTooltip="Filter by the citations count. Inclusive the given min and max values."
+              labelStart="Min"
+              labelEnd="Max"
+              valueStart={filter.citationsMin}
+              valueEnd={filter.citationsMax}
+              setValueStart={handleSelectChange('citationsMin')}
+              setValueEnd={handleSelectChange('citationsMax')}
+            />
+          </Box>
           <Box sx={{ marginBottom: '16px' }}>
             <Select
               route="authors"
