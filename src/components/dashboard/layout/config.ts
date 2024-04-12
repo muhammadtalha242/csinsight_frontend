@@ -2,7 +2,7 @@ import type { NavItemConfig } from '@/types/nav';
 import { paths } from '@/paths';
 
 export const navItems = [
-  { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'chart-pie', disabled: true },
+  // { key: 'overview', title: 'Overview', href: paths.dashboard.overview, icon: 'chart-pie', disabled: true },
   { key: 'papers', title: 'Papers', href: paths.dashboard.papers, icon: 'description' },
   { key: 'authors', title: 'Authors', href: paths.dashboard.authors, icon: 'users' },
   { key: 'venues', title: 'Venues', href: paths.dashboard.integrations, icon: 'MapPin' },
