@@ -117,10 +117,10 @@ export default function Page(): React.JSX.Element {
 
   return (
     <Stack spacing={3}>
-      <Stack direction="row" spacing={3}>
-        <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
+      {/* <Stack direction="row" spacing={3}> */}
+        {/* <Stack spacing={1} sx={{ flex: '1 1 auto' }}> */}
           <Typography variant="h4">Authors</Typography>
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+          {/* <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />}>
               Import
             </Button>
@@ -128,20 +128,20 @@ export default function Page(): React.JSX.Element {
               Export
             </Button>
           </Stack>
-        </Stack>
-        <div>
+        </Stack> */}
+        {/* <div>
           <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained">
             Add
           </Button>
         </div>
-      </Stack>
-      <CustomersFilters />
+      </Stack> */}
+      {/* <CustomersFilters />
       <CustomersTable
         count={paginatedCustomers.length}
         page={page}
         rows={paginatedCustomers}
         rowsPerPage={rowsPerPage}
-      />
+      /> */}
     </Stack>
   );
 }
