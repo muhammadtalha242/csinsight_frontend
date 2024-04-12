@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { LinearProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -10,6 +10,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import { alpha, useTheme } from '@mui/material/styles';
 import type { SxProps } from '@mui/material/styles';
+import { Box } from '@mui/system';
 import { ArrowClockwise as ArrowClockwiseIcon } from '@phosphor-icons/react/dist/ssr/ArrowClockwise';
 import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import type { ApexOptions } from 'apexcharts';
@@ -38,7 +39,9 @@ export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }
         title={title}
       />
       {isLoading ? (
-        <LinearProgress />
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 440 }}>
+          {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+        </Box>
       ) : (
         <>
           <CardContent>
