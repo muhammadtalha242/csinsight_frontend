@@ -21,3 +21,10 @@ export interface Filter {
   publishers: string[];
   metric: string;
 }
+
+export interface PagedParameters {
+  page: string;
+  pageSize: string;
+  sortField: string;
+  sortDirection: string;
+}
