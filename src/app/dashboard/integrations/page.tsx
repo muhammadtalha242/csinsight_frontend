@@ -72,10 +72,10 @@ const integrations = [
 export default function Page(): React.JSX.Element {
   return (
     <Stack spacing={3}>
-      <Stack direction="row" spacing={3}>
-        <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
-          <Typography variant="h4">Integrations</Typography>
-          <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1}>
+      {/* <Stack direction="row" spacing={3}> */}
+        {/* <Stack spacing={1} sx={{ flex: '1 1 auto' }}> */}
+          <Typography variant="h4">Venues</Typography>
+          {/* <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1}>
             <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />}>
               Import
             </Button>
@@ -83,8 +83,8 @@ export default function Page(): React.JSX.Element {
               Export
             </Button>
           </Stack>
-        </Stack>
-        <div>
+        </Stack> */}
+        {/* <div>
           <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained">
             Add
           </Button>
@@ -100,7 +100,7 @@ export default function Page(): React.JSX.Element {
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Pagination count={3} size="small" />
-      </Box>
+      </Box> */}
     </Stack>
   );
 }
