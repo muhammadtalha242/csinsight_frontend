@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import { CircularProgress } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 import type { SxProps } from '@mui/material/styles';
+import { Box } from '@mui/system';
 import type { ApexOptions } from 'apexcharts';
 
 import { Chart } from '@/components/core/chart';
@@ -16,18 +17,23 @@ export interface DonutChartProps {
   labels: string[];
   sx?: SxProps;
   title: string;
+  isLoading: boolean;
 }
 
-export function DonutChart({ chartSeries, labels, sx, title }: DonutChartProps): React.JSX.Element {
+export function DonutChart({ chartSeries, labels, sx, title, isLoading }: DonutChartProps): React.JSX.Element {
   const chartOptions = useChartOptions(labels);
 
   return (
     <Card sx={sx}>
       <CardHeader title={title} />
       <CardContent>
-        <Stack spacing={2}>
+        {isLoading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 440 }}>
+            {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+          </Box>
+        ) : (
           <Chart height={400} options={chartOptions} series={chartSeries} type="donut" width="100%" />
-        </Stack>
+        )}
       </CardContent>
     </Card>
   );
