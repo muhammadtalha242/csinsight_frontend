@@ -20,7 +20,6 @@ function FilterTextField({ label, value, setValue }: FilterTextFieldProps) {
   return (
     <TextField
       label={label}
-      size="small"
       value={value}
       type="number"
       onChange={(event) => setValue(event.target.value)}
