@@ -4,7 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import { Budget } from '@/components/dashboard/overview/budget';
+import { Budget } from '@/components/dashboard/overview/papersCount';
 import DistributionsOverTime from '@/components/dashboard/overview/distributionsOverTime';
 import { LatestOrders } from '@/components/dashboard/overview/latest-orders';
 import { LatestProducts } from '@/components/dashboard/overview/latest-products';
