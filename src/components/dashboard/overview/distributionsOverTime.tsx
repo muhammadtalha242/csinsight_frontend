@@ -20,7 +20,7 @@ const DistributionsOverTime = () => {
 
   if (!isLoading && data) {
     data.forEach((v: getPapersCountsPostResponse) => {
-      graphData.push(v.totalCitations);
+      graphData.push(v.count);
       xAxisCategories.push(v.year);
     });
   }
