@@ -23,9 +23,9 @@ const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, o
     let selectedValues: string[] | string | null = null;
 
     if (Array.isArray(value)) {
-      selectedValues = value.map((option) => option.value);
+      selectedValues = value.map((option) => option.label);
     } else if (value) {
-      selectedValues = value.value;
+      selectedValues = value.label;
     }
 
     setSelectedOption(Array.isArray(selectedValues) ? selectedValues : selectedValues ? [selectedValues] : []);
