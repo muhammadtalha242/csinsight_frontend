@@ -5,7 +5,7 @@ export const paths = {
     overview: '/dashboard',
     papers: '/dashboard/papers',
     authors: '/dashboard/authors',
-    integrations: '/dashboard/integrations',
+    venues: '/dashboard/venues',
     // account: '/dashboard/account',
     // settings: '/dashboard/settings',
   },
