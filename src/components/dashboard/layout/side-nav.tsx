@@ -83,12 +83,12 @@ export function SideNav(): React.JSX.Element {
             <MenuItem value="option2">Option 2</MenuItem>
             <MenuItem value="option3">Option 3</MenuItem>
           </Selectf> */}
-          <Select
+          {/* <Select
             inputLabel="Authors"
             options={options}
             // getOptionLabel={(option) => option.label}
             // renderInput={(params) => <TextField {...params} label="Authors" />}
-          />
+          /> */}
         </Box>
       </Drawer>
     </Box>

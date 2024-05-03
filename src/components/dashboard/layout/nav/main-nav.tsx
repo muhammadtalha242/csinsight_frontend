@@ -17,11 +17,11 @@ import { navItems } from '../config';
 import NavItem from './item-nav';
 import { MobileNav } from './mobile-nav';
 
-function renderNavItems({ items = [], pathname }: { items?: NavItemConfig[]; pathname: string }): React.JSX.Element {
+function renderNavItems({ items = [] }: { items?: NavItemConfig[]; pathname?: string }): React.JSX.Element {
   const children = items.reduce((acc: React.ReactNode[], curr: NavItemConfig): React.ReactNode[] => {
     const { key, ...item } = curr;
 
-    acc.push(<NavItem key={key} pathname={pathname} {...item} />);
+    acc.push(<NavItem key={key} {...item} />);
 
     return acc;
   }, []);
@@ -72,7 +72,7 @@ export function MainNav(): React.JSX.Element {
                 return <NavItem pathname={window.location.pathname} {...item} key={item.key} />;
               })}
             </Stack> */}
-            {renderNavItems({ items: navItems, pathname: window.location.pathname })}
+            {renderNavItems({ items: navItems })}
           </Stack>
           <Stack>
             <Tooltip title="Filters">

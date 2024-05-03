@@ -11,7 +11,7 @@ import type { NavItemConfig } from '@/types/nav';
 import { navIcons } from './nav-icons';
 
 interface NavItemProps extends Omit<NavItemConfig, 'items'> {
-  pathname: string;
+  pathname?: string;
 }
 
 export default function NavItem({ disabled, external, href, icon, title }: NavItemProps): React.JSX.Element {
