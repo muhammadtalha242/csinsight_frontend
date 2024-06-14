@@ -73,4 +73,4 @@ export const metrics = [
   { label: '#Papers', value: 'papersCount' },
 ] as const;
 
-export const API_BASE_URL = 'http://localhost:8080/api';
+export const API_BASE_URL = 'https://cs-insights.uni-goettingen.de/api';
