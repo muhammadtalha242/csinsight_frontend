@@ -32,7 +32,7 @@ export function Filters(): React.JSX.Element {
     dispatch: applicatonDispatch,
   } = React.useContext(ApplicationContext);
   const theme = useTheme();
-  const { state: filterState, dispatch: filterDispatch } = React.useContext(FilterContext);
+  const { dispatch: filterDispatch } = React.useContext(FilterContext);
   const [filter, setFilter] = React.useState<Filter>(intialFilter);
 
   const handleSelectChange =
@@ -60,7 +60,7 @@ export function Filters(): React.JSX.Element {
   };
 
   return (
-    <Box>
+    <>
       <Drawer
         sx={{
           '--SideNav-background': 'var(--mui-palette-neutral-950)',
@@ -77,16 +77,15 @@ export function Filters(): React.JSX.Element {
           color: 'var(--SideNav-color)',
           display: { xs: 'none', lg: 'flex' },
           flexDirection: 'column',
-          height: '100%',
-          maxWidth: '100%',
           position: 'fixed',
           scrollbarWidth: 'none',
-          width: 'var(--SideNav-width)',
           zIndex: 'var(--SideNav-zIndex)',
           '&::-webkit-scrollbar': { display: 'none' },
           flexShrink: 0,
-          '& .MuiDrawer-paper': {
+          '.MuiDrawer-paperAnchorDockedRight': {
             width: 'var(--SideNav-width)',
+            height: '100%',
+            maxWidth: '100%',
           },
         }}
         variant="persistent"
@@ -191,6 +190,6 @@ export function Filters(): React.JSX.Element {
           </Button>
         </Box>
       </Drawer>
-    </Box>
+    </>
   );
 }
