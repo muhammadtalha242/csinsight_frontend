@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useContext, useState, type ChangeEvent, type MouseEvent } from 'react';
 import visualizationsService, { type getVenuesResponse } from '@/services/visualizations';
 import { Card, CardHeader, CircularProgress, Divider, Link } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -55,14 +55,14 @@ const headCells: readonly HeadCell[] = [
 ];
 
 interface EnhancedTableProps {
-  onRequestSort: (event: React.MouseEvent<unknown>, property: SortingKeys) => void;
+  onRequestSort: (event: MouseEvent<unknown>, property: SortingKeys) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: SortingKeys) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: SortingKeys) => (event: MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -100,11 +100,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 export default function VenueTable({ sx }: { sx?: SxProps }) {
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<SortingKeys>('name');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(100);
-  const { state: filterState } = React.useContext(FilterContext);
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<SortingKeys>('name');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
+  const { state: filterState } = useContext(FilterContext);
   const { data, isLoading } = useQuery<getVenuesResponse, Error>(
     ['getVenues', filterState.filters, page, rowsPerPage, orderBy, order],
     () =>
@@ -117,7 +117,7 @@ export default function VenueTable({ sx }: { sx?: SxProps }) {
       })
   );
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: SortingKeys) => {
+  const handleRequestSort = (event: MouseEvent<unknown>, property: SortingKeys) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -127,7 +127,7 @@ export default function VenueTable({ sx }: { sx?: SxProps }) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -152,7 +152,7 @@ export default function VenueTable({ sx }: { sx?: SxProps }) {
                         <TableCell align="center">{row.alternativeNames.join(', ')}</TableCell>
                         <TableCell align="center">{row.type}</TableCell>
                         <TableCell align="center">
-                          {row.link !== null ?<Link href={row.link}>Link</Link>: <>Link</> }
+                          {row.link !== null ? <Link href={row.link}>Link</Link> : <>Link</>}
                         </TableCell>
                       </TableRow>
                     );

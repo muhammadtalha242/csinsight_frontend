@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, type ReactNode } from 'react';
 import RouterLink from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Tooltip } from '@mui/material';
@@ -15,8 +15,8 @@ import { Logo } from '@/components/core/logo';
 import { navItems } from '../config';
 import NavItem from './item-nav';
 
-function renderNavItems({ items = [] }: { items?: NavItemConfig[]; pathname?: string }): React.JSX.Element {
-  const children = items.reduce((acc: React.ReactNode[], curr: NavItemConfig): React.ReactNode[] => {
+function renderNavItems({ items = [] }: { items?: NavItemConfig[]; pathname?: string }) {
+  const children = items.reduce((acc: ReactNode[], curr: NavItemConfig): ReactNode[] => {
     const { key, ...item } = curr;
 
     acc.push(<NavItem key={key} {...item} />);
@@ -27,11 +27,11 @@ function renderNavItems({ items = [] }: { items?: NavItemConfig[]; pathname?: st
   return <Stack sx={{ display: 'flex', flexDirection: 'row', m: 0, p: 0 }}>{children}</Stack>;
 }
 
-export function MainNav(): React.JSX.Element {
+export function MainNav() {
   const {
     state: { isSideNavOpen },
     dispatch: ApplicationDispatch,
-  } = React.useContext(ApplicationContext);
+  } = useContext(ApplicationContext);
 
   return (
     <>

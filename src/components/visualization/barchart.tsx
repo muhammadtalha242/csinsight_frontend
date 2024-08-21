@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -21,7 +20,7 @@ export interface BarChartProps {
   title: string;
 }
 
-export function BarChart({ chartSeries, sx, title }: BarChartProps): React.JSX.Element {
+export function BarChart({ chartSeries, sx, title }: BarChartProps) {
   const chartOptions = useChartOptions();
 
   return (

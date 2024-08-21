@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -12,7 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 
-export function UpdatePasswordForm(): React.JSX.Element {
+export function UpdatePasswordForm() {
   return (
     <form
       onSubmit={(event) => {

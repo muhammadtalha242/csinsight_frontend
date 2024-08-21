@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,7 +12,7 @@ export interface TasksProgressProps {
   value: number;
 }
 
-export function TasksProgress({ value, sx }: TasksProgressProps): React.JSX.Element {
+export function TasksProgress({ value, sx }: TasksProgressProps) {
   return (
     <Card sx={sx}>
       <CardContent>

@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import RouterLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Typography } from '@mui/material';
@@ -14,7 +13,7 @@ interface NavItemProps extends Omit<NavItemConfig, 'items'> {
   pathname?: string;
 }
 
-export default function NavItem({ disabled, external, href, icon, title }: NavItemProps): React.JSX.Element {
+export default function NavItem({ disabled, external, href, icon, title }: NavItemProps) {
   const router = usePathname();
   const isActive = router === href;
 

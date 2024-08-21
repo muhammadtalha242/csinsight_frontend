@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { createContext, useCallback, useEffect, useState, type ReactNode } from 'react';
 
 import type { User } from '@/types/user';
 import { authClient } from '@/lib/auth/client';
@@ -13,20 +13,20 @@ export interface UserContextValue {
   checkSession?: () => Promise<void>;
 }
 
-export const UserContext = React.createContext<UserContextValue | undefined>(undefined);
+export const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 export interface UserProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export function UserProvider({ children }: UserProviderProps): React.JSX.Element {
-  const [state, setState] = React.useState<{ user: User | null; error: string | null; isLoading: boolean }>({
+export function UserProvider({ children }: UserProviderProps) {
+  const [state, setState] = useState<{ user: User | null; error: string | null; isLoading: boolean }>({
     user: null,
     error: null,
     isLoading: true,
   });
 
-  const checkSession = React.useCallback(async (): Promise<void> => {
+  const checkSession = useCallback(async (): Promise<void> => {
     try {
       const { data, error } = await authClient.getUser();
 
@@ -43,7 +43,7 @@ export function UserProvider({ children }: UserProviderProps): React.JSX.Element
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     checkSession().catch((err: unknown) => {
       logger.error(err);
       // noop

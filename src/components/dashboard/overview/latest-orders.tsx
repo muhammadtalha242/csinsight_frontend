@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -34,7 +33,7 @@ export interface LatestOrdersProps {
   sx?: SxProps;
 }
 
-export function LatestOrders({ orders = [], sx }: LatestOrdersProps): React.JSX.Element {
+export function LatestOrders({ orders = [], sx }: LatestOrdersProps) {
   return (
     <Card sx={sx}>
       <CardHeader title="Latest orders" />

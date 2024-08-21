@@ -1,13 +1,12 @@
-import * as React from 'react';
 import type { Metadata } from 'next';
 import Grid from '@mui/material/Unstable_Grid2';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import { PapersCount } from '@/components/dashboard/overview/papersCount';
 import DistributionsOverTime from '@/components/dashboard/overview/distributionsOverTime';
 import { LatestOrders } from '@/components/dashboard/overview/latest-orders';
 import { LatestProducts } from '@/components/dashboard/overview/latest-products';
+import { PapersCount } from '@/components/dashboard/overview/papersCount';
 import S2FeidlOfStudy from '@/components/dashboard/overview/s2feildOfStudy';
 import { TasksProgress } from '@/components/dashboard/overview/tasks-progress';
 import { TotalCustomers } from '@/components/dashboard/overview/total-customers';
@@ -15,7 +14,7 @@ import { TotalProfit } from '@/components/dashboard/overview/total-profit';
 
 export const metadata = { title: `Overview | Dashboard | ${config.site.name}` } satisfies Metadata;
 
-export default function Page(): React.JSX.Element {
+export default function Page() {
   return (
     <Grid container spacing={3}>
       <Grid lg={3} sm={6} xs={12}>

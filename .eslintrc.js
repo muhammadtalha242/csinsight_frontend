@@ -41,7 +41,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     'import/newline-after-import': 'error',
     'react/jsx-uses-react': 'error',
-    'react/react-in-jsx-scope': 'error',
     'unicorn/filename-case': 'off',
 
     // Deactivated
@@ -58,7 +57,7 @@ module.exports = {
     'no-redeclare': 'off', // conflict with TypeScript function overloads
     'react/jsx-fragments': 'off', // personal style
     'react/prop-types': 'off', // TypeScript is used for type checking
-
+    'import/default': 'off', // Disable import/default rule
     '@next/next/no-img-element': 'off', // Temporary disabled
     '@typescript-eslint/restrict-template-expressions': 'off',
     'react/function-component-definition': 'off',

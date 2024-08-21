@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
@@ -24,7 +23,7 @@ export interface TrafficProps {
   sx?: SxProps;
 }
 
-export function Traffic({ chartSeries, labels, sx }: TrafficProps): React.JSX.Element {
+export function Traffic({ chartSeries, labels, sx }: TrafficProps) {
   const chartOptions = useChartOptions(labels);
 
   return (

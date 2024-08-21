@@ -1,5 +1,5 @@
-import * as React from 'react';
 // import RouterLink from 'next/link';
+import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -24,12 +24,12 @@ export interface UserPopoverProps {
   open: boolean;
 }
 
-export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): React.JSX.Element {
+export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps) {
   const { checkSession } = useUser();
 
   const router = useRouter();
 
-  const handleSignOut = React.useCallback(async (): Promise<void> => {
+  const handleSignOut = useCallback(async (): Promise<void> => {
     try {
       const { error } = await authClient.signOut();
 

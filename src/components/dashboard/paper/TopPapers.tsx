@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
-import visualizationsService, { type  getTopPapersResponse } from '@/services/visualizations';
+import React, { useContext, useState } from 'react';
+import visualizationsService, { type getTopPapersResponse } from '@/services/visualizations';
 import { Card, CardHeader, CircularProgress, Divider, Link } from '@mui/material';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -17,7 +17,6 @@ import { visuallyHidden } from '@mui/utils';
 import { useQuery } from 'react-query';
 
 import { FilterContext } from '@/contexts/filters.context';
-
 
 export interface Data {
   id: number;
@@ -112,11 +111,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 export default function EnhancedTable({ sx }: { sx?: SxProps }) {
-  const [order, setOrder] = React.useState<Order>('desc');
-  const [orderBy, setOrderBy] = React.useState<SortingKeys>('citation');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(100);
-  const { state: filterState } = React.useContext(FilterContext);
+  const [order, setOrder] = useState<Order>('desc');
+  const [orderBy, setOrderBy] = useState<SortingKeys>('citation');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
+  const { state: filterState } = useContext(FilterContext);
   const { data, isLoading } = useQuery<getTopPapersResponse, Error>(
     ['topPapers', filterState.filters, page, rowsPerPage, orderBy, order],
     () =>
@@ -126,7 +125,7 @@ export default function EnhancedTable({ sx }: { sx?: SxProps }) {
         pageSize: rowsPerPage.toString(),
         sortField: orderBy,
         sortDirection: order,
-      }) 
+      })
   );
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: SortingKeys) => {

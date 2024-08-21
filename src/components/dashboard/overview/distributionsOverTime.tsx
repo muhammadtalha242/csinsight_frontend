@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import visualizationsService, { type getPapersCountsPostResponse } from '@/services/visualizations';
 import { useQuery } from 'react-query';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useContext, useState } from 'react';
 import { ACCESS_TYPE, FIELDS_OF_STUDY, TYPES_OF_PAPER } from '@/constants/const';
 import { CheckCircleTwoTone } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -26,14 +26,14 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 
-export function Filters(): React.JSX.Element {
+export function Filters() {
   const {
     state: { isSideNavOpen },
     dispatch: applicatonDispatch,
-  } = React.useContext(ApplicationContext);
+  } = useContext(ApplicationContext);
   const theme = useTheme();
-  const { dispatch: filterDispatch } = React.useContext(FilterContext);
-  const [filter, setFilter] = React.useState<Filter>(intialFilter);
+  const { dispatch: filterDispatch } = useContext(FilterContext);
+  const [filter, setFilter] = useState<Filter>(intialFilter);
 
   const handleSelectChange =
     (

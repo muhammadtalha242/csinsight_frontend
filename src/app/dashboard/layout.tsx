@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { ReactNode, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -11,15 +11,15 @@ import { MainNav } from '@/components/dashboard/layout/nav/main-nav';
 import { Filters } from '@/components/filter/Filters';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const drawerWidth = 280;
 
-export default function Layout({ children }: LayoutProps): React.JSX.Element {
+export default function Layout({ children }: LayoutProps) {
   const {
     state: { isSideNavOpen },
-  } = React.useContext(ApplicationContext);
+  } = useContext(ApplicationContext);
   const Main = styled('main')(({ theme }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -47,8 +47,6 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
             '--MainNav-zIndex': 1000,
             '--SideNav-width': '320px',
             '--SideNav-zIndex': 1100,
-            '--MobileNav-width': '320px',
-            '--MobileNav-zIndex': 1100,
           },
         }}
       />

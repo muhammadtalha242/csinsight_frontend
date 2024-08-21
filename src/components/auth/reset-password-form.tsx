@@ -21,7 +21,7 @@ type Values = zod.infer<typeof schema>;
 
 const defaultValues = { email: '' } satisfies Values;
 
-export function ResetPasswordForm(): React.JSX.Element {
+export function ResetPasswordForm() {
   const [isPending, setIsPending] = React.useState<boolean>(false);
 
   const {

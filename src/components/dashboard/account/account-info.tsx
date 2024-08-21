@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -17,7 +16,7 @@ const user = {
   timezone: 'GTM-7',
 } as const;
 
-export function AccountInfo(): React.JSX.Element {
+export function AccountInfo() {
   return (
     <Card>
       <CardContent>

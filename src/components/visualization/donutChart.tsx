@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { CircularProgress } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -20,7 +19,7 @@ export interface DonutChartProps {
   isLoading: boolean;
 }
 
-export function DonutChart({ chartSeries, labels, sx, title, isLoading }: DonutChartProps): React.JSX.Element {
+export function DonutChart({ chartSeries, labels, sx, title, isLoading }: DonutChartProps) {
   const chartOptions = useChartOptions(labels);
 
   return (

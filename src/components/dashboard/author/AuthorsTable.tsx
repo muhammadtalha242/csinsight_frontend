@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useContext, useState, type ChangeEvent, type MouseEvent } from 'react';
 import visualizationsService, { type getAuthorsResponse } from '@/services/visualizations';
 import { Card, CardHeader, CircularProgress, Divider, Link } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -26,7 +26,6 @@ export interface AuthorData {
   totalCitations: number;
   link: string;
 }
-
 
 type Order = 'asc' | 'desc';
 const nonSortingKeys = ['name', 'link'];
@@ -61,14 +60,14 @@ const headCells: readonly HeadCell[] = [
 ];
 
 interface EnhancedTableProps {
-  onRequestSort: (event: React.MouseEvent<unknown>, property: SortingKeys) => void;
+  onRequestSort: (event: MouseEvent<unknown>, property: SortingKeys) => void;
   order: Order;
   orderBy: string;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: SortingKeys) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: SortingKeys) => (event: MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -106,11 +105,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 export default function AuthorsTable({ sx }: { sx?: SxProps }) {
-  const [order, setOrder] = React.useState<Order>('desc');
-  const [orderBy, setOrderBy] = React.useState<SortingKeys>('totalCitations');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(100);
-  const { state: filterState } = React.useContext(FilterContext);
+  const [order, setOrder] = useState<Order>('desc');
+  const [orderBy, setOrderBy] = useState<SortingKeys>('totalCitations');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
+  const { state: filterState } = useContext(FilterContext);
   const { data, isLoading } = useQuery<getAuthorsResponse, Error>(
     ['getAuthors', filterState.filters, page, rowsPerPage, orderBy, order],
     () =>
@@ -123,7 +122,7 @@ export default function AuthorsTable({ sx }: { sx?: SxProps }) {
       })
   );
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: SortingKeys) => {
+  const handleRequestSort = (event: MouseEvent<unknown>, property: SortingKeys) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -133,7 +132,7 @@ export default function AuthorsTable({ sx }: { sx?: SxProps }) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };

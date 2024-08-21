@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,7 +15,7 @@ export interface BudgetProps {
   value: string;
 }
 
-export function PapersCount({ diff, trend, sx, value }: BudgetProps): React.JSX.Element {
+export function PapersCount({ diff, trend, sx, value }: BudgetProps) {
   const TrendIcon = trend === 'up' ? ArrowUpIcon : ArrowDownIcon;
   const trendColor = trend === 'up' ? 'var(--mui-palette-success-main)' : 'var(--mui-palette-error-main)';
 

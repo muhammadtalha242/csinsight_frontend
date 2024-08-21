@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -21,7 +20,7 @@ const states = [
   { value: 'los-angeles', label: 'Los Angeles' },
 ] as const;
 
-export function AccountDetailsForm(): React.JSX.Element {
+export function AccountDetailsForm() {
   return (
     <form
       onSubmit={(event) => {

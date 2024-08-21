@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,7 +15,7 @@ export interface TotalCustomersProps {
   value: string;
 }
 
-export function TotalCustomers({ diff, trend, sx, value }: TotalCustomersProps): React.JSX.Element {
+export function TotalCustomers({ diff, trend, sx, value }: TotalCustomersProps) {
   const TrendIcon = trend === 'up' ? ArrowUpIcon : ArrowDownIcon;
   const trendColor = trend === 'up' ? 'var(--mui-palette-success-main)' : 'var(--mui-palette-error-main)';
 

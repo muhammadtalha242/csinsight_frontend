@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Metadata } from 'next';
 import RouterLink from 'next/link';
 import Box from '@mui/material/Box';
@@ -12,7 +11,7 @@ import { paths } from '@/paths';
 
 export const metadata = { title: `Not found | Errors | ${config.site.name}` } satisfies Metadata;
 
-export default function NotFound(): React.JSX.Element {
+export default function NotFound() {
   return (
     <Box component="main" sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', minHeight: '100%' }}>
       <Stack spacing={3} sx={{ alignItems: 'center', maxWidth: 'md' }}>

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -23,7 +22,7 @@ export interface IntegrationCardProps {
   integration: Integration;
 }
 
-export function IntegrationCard({ integration }: IntegrationCardProps): React.JSX.Element {
+export function IntegrationCard({ integration }: IntegrationCardProps) {
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <CardContent sx={{ flex: '1 1 auto' }}>

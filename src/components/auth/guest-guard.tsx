@@ -12,7 +12,7 @@ export interface GuestGuardProps {
   children: React.ReactNode;
 }
 
-export function GuestGuard({ children }: GuestGuardProps): React.JSX.Element | null {
+export function GuestGuard({ children }: GuestGuardProps)  {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
   const [isChecking, setIsChecking] = React.useState<boolean>(true);

@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -25,7 +24,7 @@ export interface LineChartProps {
   isLoading: boolean;
 }
 
-export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }: LineChartProps): React.JSX.Element {
+export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }: LineChartProps) {
   const chartOptions = useChartOptions(xAxisCategories);
 
   return (

@@ -11,7 +11,7 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps): React.JSX.Element {
+export function Layout({ children }: LayoutProps) {
   return (
     <Box
       sx={{
