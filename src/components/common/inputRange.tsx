@@ -1,5 +1,7 @@
 import { Stack, TextField } from '@mui/material';
 
+import FilterLabel from './filterLabel';
+
 export interface FilterTextFieldProps {
   label: string;
   value: string;
@@ -35,6 +37,7 @@ function FilterTextField({ label, value, setValue }: FilterTextFieldProps) {
 export default function FilterRange(props: FilterRangeProps) {
   return (
     <>
+      <FilterLabel label={props.label} helpTooltip={props.helpTooltip} />
       <Stack direction="row" style={{ alignItems: 'center' }} justifyContent="space-between">
         <FilterTextField label={props.labelStart} value={props.valueStart} setValue={props.setValueStart} />
         <div>-</div>

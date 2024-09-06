@@ -36,11 +36,11 @@ export function Sales({ chartSeries, sx }: SalesProps) {
         <Chart height={350} options={chartOptions} series={chartSeries} type="bar" width="100%" />
       </CardContent>
       <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
+      {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small">
           Overview
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }

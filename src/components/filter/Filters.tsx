@@ -122,6 +122,10 @@ export function Filters() {
             <Select
               route="authors"
               options={[]}
+              helpTooltip="Filter by the authors.
+        The pattern will only match the beginning of the name or after a whitespace.
+        3 characters minimum are required; case-insensitive.
+        Special characters (ä, é, ì, ...) need to be removed without replacement."
               inputLabel="Authors"
               onChange={handleSelectChange('authorIds')}
               multiple
@@ -131,6 +135,9 @@ export function Filters() {
             <Select
               route="venues"
               inputLabel="Venues"
+              helpTooltip="Filter by the venue.
+        Matches any position in the name of the venue.
+        3 characters minimum required; case-sensitive."
               multiple
               options={[]}
               onChange={handleSelectChange('venueIds')}
@@ -141,6 +148,10 @@ export function Filters() {
             <Select
               route="fieldsOfStudy"
               inputLabel="Field of Study"
+              helpTooltip={
+                'Filter by the field of study. One paper can have multiple fields of study, but most papers are in the field "Computer Science". ' +
+                'Matches any position in the field; case-insensitive.'
+              }
               multiple
               onChange={handleSelectChange('fieldsOfStudy')}
               options={FIELDS_OF_STUDY.map((field) => ({ label: field, value: field }))}
@@ -150,6 +161,8 @@ export function Filters() {
             <Select
               route="typesOfPaper"
               inputLabel="Types of papers"
+              helpTooltip="Filter by the type of paper (BibTeX type).
+        Matches any position in the name of the type; case-insensitive."
               multiple
               onChange={handleSelectChange('typesOfPaper')}
               options={TYPES_OF_PAPER.map((type) => ({ label: type, value: type }))}
@@ -159,6 +172,8 @@ export function Filters() {
             <Select
               route="accessTypes"
               inputLabel="Access Type"
+              helpTooltip="Filter by the access type.
+        Select from the given options."
               multiple
               onChange={handleSelectChange('accessType')}
               options={ACCESS_TYPE.map((type) => ({ label: type, value: type }))}

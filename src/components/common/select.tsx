@@ -3,6 +3,8 @@ import { DEBOUNCE_DELAY_AUTOCOMPLETE, type AUTOCOMPLETE_ROUTES } from '@/constan
 import { useAutocomplete } from '@/services/autocomplete';
 import { Autocomplete, CircularProgress, debounce, TextField } from '@mui/material';
 
+import FilterLabel from './filterLabel';
+
 interface Option {
   label: string;
   value: string;
@@ -12,10 +14,11 @@ interface SelectProps {
   options: Option[];
   multiple?: boolean;
   inputLabel: string;
+  helpTooltip: string;
   onChange?: (selectedOptions: string[] | string | null) => void; // Updated type to match the Autocomplete's expectation
 }
 
-const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, onChange }) => {
+const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, onChange, helpTooltip }) => {
   const [, setSelectedOption] = React.useState<string[]>([]);
   const [inputValue, setInputValue] = React.useState<string>('');
   const { data, isFetching } = useAutocomplete({ route, inputValue });
@@ -36,34 +39,37 @@ const Select: React.FC<SelectProps> = ({ options, multiple, inputLabel, route, o
   }, DEBOUNCE_DELAY_AUTOCOMPLETE);
 
   return (
-    <Autocomplete
-      multiple={multiple}
-      id="tags-outlined"
-      options={data || options}
-      getOptionLabel={(option) => option.value}
-      filterSelectedOptions
-      loading={false}
-      onInputChange={(_, newInputValue) => {
-        setInputValue(newInputValue.trim());
-      }}
-      renderOption={(props, option) => <li {...props}>{option.value}</li>}
-      onChange={handleChange}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label={inputLabel}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {isFetching ? <CircularProgress color="inherit" size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
-        />
-      )}
-    />
+    <>
+      <FilterLabel label={inputLabel} helpTooltip={helpTooltip} />
+      <Autocomplete
+        multiple={multiple}
+        id="tags-outlined"
+        options={data || options}
+        getOptionLabel={(option) => option.value}
+        filterSelectedOptions
+        loading={false}
+        onInputChange={(_, newInputValue) => {
+          setInputValue(newInputValue.trim());
+        }}
+        renderOption={(props, option) => <li {...props}>{option.value}</li>}
+        onChange={handleChange}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={inputLabel}
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {isFetching ? <CircularProgress color="inherit" size={20} /> : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
+          />
+        )}
+      />
+    </>
   );
 };
 
