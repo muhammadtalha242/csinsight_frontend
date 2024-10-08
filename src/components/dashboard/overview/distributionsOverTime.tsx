@@ -31,7 +31,7 @@ const DistributionsOverTime = () => {
       isLoading={isLoading}
       chartSeries={[{ name: 'This year', data: graphData }]}
       sx={{ height: '100%' }}
-      title="Bar Chart"
+      title="Publications Over Time"
       xAxisCategories={xAxisCategories}
     />
   );

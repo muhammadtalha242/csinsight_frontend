@@ -1,17 +1,12 @@
 'use client';
 
-import { CircularProgress } from '@mui/material';
-import Button from '@mui/material/Button';
+import { CircularProgress, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import { alpha, useTheme } from '@mui/material/styles';
 import type { SxProps } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import { ArrowClockwise as ArrowClockwiseIcon } from '@phosphor-icons/react/dist/ssr/ArrowClockwise';
-import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import type { ApexOptions } from 'apexcharts';
 
 import { Chart } from '@/components/core/chart';
@@ -29,14 +24,6 @@ export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }
 
   return (
     <Card sx={sx}>
-      <CardHeader
-        action={
-          <Button color="inherit" size="small" startIcon={<ArrowClockwiseIcon fontSize="var(--icon-fontSize-md)" />}>
-            Sync
-          </Button>
-        }
-        title={title}
-      />
       {isLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 440 }}>
           {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
@@ -44,14 +31,12 @@ export function LineChart({ chartSeries, sx, title, xAxisCategories, isLoading }
       ) : (
         <>
           <CardContent>
+            <Typography variant="h6" gutterBottom>
+              {title}
+            </Typography>
             <Chart height={350} options={chartOptions} series={chartSeries} type="line" width="100%" />
           </CardContent>
           <Divider />
-          {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
-            <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small">
-              Overview
-            </Button>
-          </CardActions> */}
         </>
       )}
     </Card>
@@ -101,9 +86,9 @@ function useChartOptions(xAxisCategories: string[]): ApexOptions {
       },
     },
     yaxis: {
-      title: { text: 'Total Citations', offsetY: 10 },
+      title: { text: 'Total Citations', offsetX: 10 },
       labels: {
-        formatter: (value) => (value > 0 ? `${value}K` : `${value}`),
+        formatter: (value) => (value > 0 ? `${value}` : `${value}`),
         offsetX: -10,
         style: { colors: theme.palette.text.secondary },
       },

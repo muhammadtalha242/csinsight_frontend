@@ -153,7 +153,12 @@ export default function AuthorsTable({ sx }: { sx?: SxProps }) {
 
                     return (
                       <TableRow hover tabIndex={-1} key={row.id} sx={{ cursor: 'pointer' }}>
-                        <TableCell id={labelId}>{row.name}</TableCell>
+                        <TableCell sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 200,
+                          }} id={labelId}>{row.name}</TableCell>
                         <TableCell align="center">{row.papercount}</TableCell>
                         <TableCell align="center">{row.hindex}</TableCell>
                         <TableCell align="center">{row.totalCitations}</TableCell>

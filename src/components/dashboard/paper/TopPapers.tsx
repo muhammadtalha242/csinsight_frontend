@@ -158,11 +158,48 @@ export default function EnhancedTable({ sx }: { sx?: SxProps }) {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
-                      <TableRow hover tabIndex={-1} key={row.id} sx={{ cursor: 'pointer' }}>
-                        <TableCell id={labelId}>{row.title}</TableCell>
+                      <TableRow
+                        hover
+                        tabIndex={-1}
+                        key={row.id}
+                        sx={{
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <TableCell
+                          sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 200,
+                          }}
+                          id={labelId}
+                        >
+                          {row.title}
+                        </TableCell>
                         <TableCell align="center">{row.year}</TableCell>
-                        <TableCell align="center">{row.venue}</TableCell>
-                        <TableCell align="center">{row.authors.map((a) => a.name).join(', ')}</TableCell>
+                        <TableCell
+                          sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 0,
+                          }}
+                          align="center"
+                        >
+                          {row.venue}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 200,
+                          }}
+                          align="center"
+                        >
+                          {row.authors.map((a) => a.name).join(', ')}
+                        </TableCell>
                         <TableCell align="center">{row.citation}</TableCell>
                         <TableCell align="center">
                           <Link href={row.link}>Link</Link>

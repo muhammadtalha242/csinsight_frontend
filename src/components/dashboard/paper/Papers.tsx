@@ -6,6 +6,7 @@ import S2FeidlOfStudy from '@/components/dashboard/overview/s2feildOfStudy';
 import { TotalCustomers } from '@/components/dashboard/overview/total-customers';
 import { TotalProfit } from '@/components/dashboard/overview/total-profit';
 
+import PublicationAreaChartWithSampleData from '../overview/PublicationAreaChart';
 import CustomPaginationActionsTable from './TopPapers';
 
 export default function Papers() {
@@ -26,7 +27,9 @@ export default function Papers() {
       <Grid lg={4} md={12} xs={12}>
         <S2FeidlOfStudy />
       </Grid>
-
+      <Grid lg={12} md={10} xs={12}>
+        <PublicationAreaChartWithSampleData />
+      </Grid>
       <Grid lg={12} md={12} xs={12}>
         <CustomPaginationActionsTable sx={{ height: '100%' }} />
       </Grid>

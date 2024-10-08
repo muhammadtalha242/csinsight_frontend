@@ -148,8 +148,28 @@ export default function VenueTable({ sx }: { sx?: SxProps }) {
 
                     return (
                       <TableRow hover tabIndex={-1} key={row.id} sx={{ cursor: 'pointer' }}>
-                        <TableCell id={labelId}>{row.name}</TableCell>
-                        <TableCell align="center">{row.alternativeNames.join(', ')}</TableCell>
+                        <TableCell
+                          sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 200,
+                          }}
+                          id={labelId}
+                        >
+                          {row.name}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                            maxWidth: 200,
+                          }}
+                          align="center"
+                        >
+                          {row.alternativeNames.join(', ')}
+                        </TableCell>
                         <TableCell align="center">{row.type}</TableCell>
                         <TableCell align="center">
                           {row.link !== null ? <Link href={row.link}>Link</Link> : <>Link</>}
