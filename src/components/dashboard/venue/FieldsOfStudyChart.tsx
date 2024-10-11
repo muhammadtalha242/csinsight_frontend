@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { fetchFieldsOfStudyDistribution, type FieldOfStudyDistribution } from '@/services/visualizations';
 import { Alert, Box, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 import type { ApexOptions } from 'apexcharts';
 import { useQuery } from 'react-query';
 
 import { FilterContext } from '@/contexts/filters.context';
+import ChartDescriptionDialog, { infoIcon } from '@/components/common/ChartDescriptionDialog';
 import { Chart } from '@/components/core/chart';
 
 interface ChartData {
@@ -20,6 +21,10 @@ const FieldsOfStudyChart: React.FC = () => {
     ['fetchFieldsOfStudyDistribution', filterState.filters],
     () => fetchFieldsOfStudyDistribution(filterState.filters)
   );
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const chartData: ChartData = useMemo(() => {
     if (!data) return { categories: [], series: [] };
@@ -64,10 +69,24 @@ const FieldsOfStudyChart: React.FC = () => {
       type: 'bar',
       height: 500,
       stacked: true,
-      toolbar: { show: true },
+      toolbar: {
+        show: true,
+        tools: {
+          customIcons: [
+            {
+              icon: infoIcon,
+              click: () => {
+                handleOpen();
+              },
+              title: 'More information about the chart',
+              index: -1,
+            },
+          ],
+        },
+      },
       zoom: {
         enabled: true,
-        type: 'xy'
+        type: 'xy',
       },
     },
     plotOptions: {
@@ -80,10 +99,10 @@ const FieldsOfStudyChart: React.FC = () => {
             enabled: true,
             style: {
               fontSize: '13px',
-              fontWeight: 900
-            }
-          }, 
-          position: 'center', 
+              fontWeight: 900,
+            },
+          },
+          position: 'center',
         },
       },
     },
@@ -105,14 +124,6 @@ const FieldsOfStudyChart: React.FC = () => {
     legend: {
       position: 'bottom',
       offsetY: 10,
-    },
-    title: {
-      text: 'Fields of Study Distribution by Venue',
-      align: 'center',
-      style: {
-        fontSize: '20px',
-        fontWeight: 'bold',
-      },
     },
     tooltip: {
       y: {
@@ -176,7 +187,17 @@ const FieldsOfStudyChart: React.FC = () => {
   return (
     <Card>
       <CardContent>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Typography variant="h6" gutterBottom>
+            Fields of Study Distribution by Venue
+          </Typography>
+        </Box>
         <Chart options={chartOptions} series={series} type="bar" height={560} width="100%" />
+        <ChartDescriptionDialog
+          open={open}
+          onClose={handleClose}
+          description="This chart displays the distribution of research areas based on the provided data. Each slice represents a different research area, with the size of the slice indicating the proportion of that area relative to the total. The legend below shows the labels for each area."
+        />
       </CardContent>
     </Card>
   );

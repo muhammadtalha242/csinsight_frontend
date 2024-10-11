@@ -1,8 +1,8 @@
 export const paths = {
-  home: '/dashboard/papers',
+  home: '/dashboard',
   // auth: { signIn: '/auth/sign-in', signUp: '/auth/sign-up', resetPassword: '/auth/reset-password' },
   dashboard: {
-    // overview: '/dashboard',
+    overview: '/dashboard',
     papers: '/dashboard/papers',
     authors: '/dashboard/authors',
     venues: '/dashboard/venues',

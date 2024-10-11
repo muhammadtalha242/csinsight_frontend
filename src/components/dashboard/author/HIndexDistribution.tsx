@@ -1,16 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { fetchHIndexDistribution, type HIndexDistributionData } from '@/services/visualizations';
 import { Alert, Box, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 import type { ApexOptions } from 'apexcharts';
 import { useQuery } from 'react-query';
 
+import ChartDescriptionDialog, { infoIcon } from '@/components/common/ChartDescriptionDialog';
 import { Chart } from '@/components/core/chart';
 
 const HIndexDistribution: React.FC = () => {
   const { data, isLoading, error } = useQuery<HIndexDistributionData>(['hIndexDistribution'], fetchHIndexDistribution);
+  const [open, setOpen] = useState(false);
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   if (isLoading) {
     return (
       <Box display="flex" alignItems="center">
@@ -36,7 +40,21 @@ const HIndexDistribution: React.FC = () => {
   const options: ApexOptions = {
     chart: {
       type: 'bar',
-      toolbar: { show: true },
+      toolbar: {
+        show: true,
+        tools: {
+          customIcons: [
+            {
+              icon: infoIcon,
+              click: () => {
+                handleOpen();
+              },
+              title: 'More information about the chart',
+              index: -1,
+            },
+          ],
+        },
+      },
       zoom: {
         enabled: true,
         type: 'xy',
@@ -81,6 +99,11 @@ const HIndexDistribution: React.FC = () => {
         </Typography>
         <Chart options={options} series={series} type="bar" width="100%" height={600} />
       </CardContent>
+      <ChartDescriptionDialog
+        open={open}
+        onClose={handleClose}
+        description="Understand the spread of H-Index values in your author dataset."
+      />
     </Card>
   );
 };

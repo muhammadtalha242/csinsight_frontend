@@ -27,7 +27,7 @@ export function DonutChart({ chartSeries, labels, sx, title, isLoading }: DonutC
       <CardHeader title={title} />
       <CardContent>
         {isLoading ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 440 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 400 }}>
             {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
           </Box>
         ) : (

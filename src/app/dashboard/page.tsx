@@ -1,79 +1,42 @@
 import type { Metadata } from 'next';
 import Grid from '@mui/material/Unstable_Grid2';
-import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import DistributionsOverTime from '@/components/dashboard/overview/distributionsOverTime';
-import { LatestOrders } from '@/components/dashboard/overview/latest-orders';
-import { LatestProducts } from '@/components/dashboard/overview/latest-products';
+import ResearchAreasDistribution from '@/components/dashboard/author/ResearchAreasDistribution';
 import { PapersCount } from '@/components/dashboard/overview/papersCount';
+import PublicationAreaChartWithSampleData from '@/components/dashboard/overview/PublicationAreaChart';
 import S2FeidlOfStudy from '@/components/dashboard/overview/s2feildOfStudy';
-import { TasksProgress } from '@/components/dashboard/overview/tasks-progress';
 import { TotalCustomers } from '@/components/dashboard/overview/total-customers';
 import { TotalProfit } from '@/components/dashboard/overview/total-profit';
+import TopVenuesChart from '@/components/dashboard/venue/TopVenuesChart';
 
 export const metadata = { title: `Overview | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 export default function Page() {
   return (
     <Grid container spacing={3}>
-      <Grid lg={3} sm={6} xs={12}>
-        <PapersCount diff={12} trend="up" sx={{ height: '100%' }} value="$24k" />
+      <Grid lg={4} sm={6} xs={12}>
+        <PapersCount sx={{ height: '100%' }} value="45M" />
       </Grid>
-      <Grid lg={3} sm={6} xs={12}>
-        <TotalCustomers diff={16} trend="down" sx={{ height: '100%' }} value="1.6k" />
+      <Grid lg={4} sm={6} xs={12}>
+        <TotalCustomers sx={{ height: '100%' }} value="82M" />
       </Grid>
-      <Grid lg={3} sm={6} xs={12}>
-        <TasksProgress sx={{ height: '100%' }} value={75.5} />
-      </Grid>
-      <Grid lg={3} sm={6} xs={12}>
-        <TotalProfit sx={{ height: '100%' }} value="$15k" />
+      <Grid lg={4} sm={6} xs={12}>
+        <TotalProfit sx={{ height: '100%' }} value="192K" />
       </Grid>
       <Grid lg={8} xs={12}>
-        <DistributionsOverTime />
+        <PublicationAreaChartWithSampleData />
       </Grid>
       <Grid lg={4} md={6} xs={12}>
         <S2FeidlOfStudy />
       </Grid>
-      <Grid lg={4} md={6} xs={12}>
-        <LatestProducts
-          products={[
-            {
-              id: 'PRD-005',
-              name: 'Soja & Co. Eucalyptus',
-              image: '/assets/product-5.png',
-              updatedAt: dayjs().subtract(18, 'minutes').subtract(5, 'hour').toDate(),
-            },
-            {
-              id: 'PRD-004',
-              name: 'Necessaire Body Lotion',
-              image: '/assets/product-4.png',
-              updatedAt: dayjs().subtract(41, 'minutes').subtract(3, 'hour').toDate(),
-            },
-            {
-              id: 'PRD-003',
-              name: 'Ritual of Sakura',
-              image: '/assets/product-3.png',
-              updatedAt: dayjs().subtract(5, 'minutes').subtract(3, 'hour').toDate(),
-            },
-            {
-              id: 'PRD-002',
-              name: 'Lancome Rouge',
-              image: '/assets/product-2.png',
-              updatedAt: dayjs().subtract(23, 'minutes').subtract(2, 'hour').toDate(),
-            },
-            {
-              id: 'PRD-001',
-              name: 'Erbology Aloe Vera',
-              image: '/assets/product-1.png',
-              updatedAt: dayjs().subtract(10, 'minutes').toDate(),
-            },
-          ]}
-          sx={{ height: '100%' }}
-        />
+      <Grid lg={6} md={6} xs={12}>
+        {/* <DistributionsOverTime /> */}
+        <TopVenuesChart />
+
       </Grid>
-      <Grid lg={8} md={12} xs={12}>
-        <LatestOrders
+      <Grid lg={6} md={12} xs={12}>
+        {/* <LatestOrders
           orders={[
             {
               id: 'ORD-007',
@@ -119,7 +82,8 @@ export default function Page() {
             },
           ]}
           sx={{ height: '100%' }}
-        />
+        /> */}
+        <ResearchAreasDistribution />
       </Grid>
     </Grid>
   );

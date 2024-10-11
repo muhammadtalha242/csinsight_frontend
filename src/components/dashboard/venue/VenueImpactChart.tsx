@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { fetchVenueImpact, type VenueImpact } from '@/services/visualizations';
-import { Alert, Box, CircularProgress, Paper, Typography } from '@mui/material';
+import { Alert, Box, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 import type { ApexOptions } from 'apexcharts';
 import { useQuery } from 'react-query';
 
 import { FilterContext } from '@/contexts/filters.context';
+import ChartDescriptionDialog, { infoIcon } from '@/components/common/ChartDescriptionDialog';
 import { Chart } from '@/components/core/chart';
 
 const VenueImpactChart: React.FC = () => {
@@ -14,6 +15,11 @@ const VenueImpactChart: React.FC = () => {
   const { data, isLoading, error } = useQuery<VenueImpact[]>(['venuesImpactAnalysis', filterState.filters], () =>
     fetchVenueImpact(filterState.filters)
   );
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   if (isLoading) {
     return (
@@ -37,6 +43,21 @@ const VenueImpactChart: React.FC = () => {
     chart: {
       type: 'bar',
       height: 450,
+      toolbar: {
+        show: true,
+        tools: {
+          customIcons: [
+            {
+              icon: infoIcon,
+              click: () => {
+                handleOpen();
+              },
+              title: 'More information about the chart',
+              index: -1,
+            },
+          ],
+        },
+      },
     },
     plotOptions: {
       bar: {
@@ -67,19 +88,12 @@ const VenueImpactChart: React.FC = () => {
     fill: {
       opacity: 1,
     },
-    title: {
-      text: 'Venue Impact Analysis (Average Citations per Venue)',
-      align: 'center',
-      style: {
-        fontSize: '20px',
-        fontWeight: 'bold',
-      },
-    },
     tooltip: {
       y: {
         formatter: (val: number) => `${val.toFixed(2)} Citations`,
       },
     },
+
     responsive: [
       {
         breakpoint: 1000,
@@ -111,9 +125,21 @@ const VenueImpactChart: React.FC = () => {
   ];
 
   return (
-    <Paper elevation={3} style={{ padding: '20px' }}>
-      <Chart options={chartOptions} series={series} type="bar" height={450} width="100%" />
-    </Paper>
+    <Card>
+      <CardContent>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Typography variant="h6" gutterBottom>
+            Venue Impact Analysis (Average Citations per Venue)
+          </Typography>
+        </Box>
+        <Chart options={chartOptions} series={series} type="bar" height={450} width="100%" />
+      </CardContent>
+      <ChartDescriptionDialog
+        open={open}
+        onClose={handleClose}
+        description="Assesses the average number of citations per venue to identify influential or prestigious publication outlets."
+      />
+    </Card>
   );
 };
 

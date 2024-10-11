@@ -1,17 +1,22 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { fetchTopVenues, type IVenue } from '@/services/visualizations';
-import { Alert, Box, CircularProgress, Paper, Typography } from '@mui/material';
+import { Alert, Box, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 import type { ApexOptions } from 'apexcharts';
 import { useQuery } from 'react-query';
 
 import { FilterContext } from '@/contexts/filters.context';
+import ChartDescriptionDialog, { infoIcon } from '@/components/common/ChartDescriptionDialog';
 import { Chart } from '@/components/core/chart';
 
 const TopVenuesChart: React.FC = () => {
   const { state: filterState } = useContext(FilterContext);
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { data, isLoading, error } = useQuery<IVenue[]>(['TopVenuesCharts', filterState.filters], () =>
     fetchTopVenues(filterState.filters)
   );
@@ -38,9 +43,21 @@ const TopVenuesChart: React.FC = () => {
   const chartOptions: ApexOptions = {
     chart: {
       type: 'bar',
-      height: 450,
+      height: 400,
       toolbar: {
         show: true,
+        tools: {
+          customIcons: [
+            {
+              icon: infoIcon,
+              click: () => {
+                handleOpen();
+              },
+              title: 'More information about the chart',
+              index: -1,
+            },
+          ],
+        },
       },
     },
     plotOptions: {
@@ -74,15 +91,6 @@ const TopVenuesChart: React.FC = () => {
     yaxis: {
       title: {
         text: 'Venues',
-      },
-    },
-    title: {
-      text: 'Top Venues by Publication Count',
-      align: 'center',
-      style: {
-        fontSize: '20px',
-        fontWeight: 'bold',
-        color: '#263238',
       },
     },
     tooltip: {
@@ -121,9 +129,21 @@ const TopVenuesChart: React.FC = () => {
   ];
 
   return (
-    <Paper elevation={3} style={{ padding: '20px' }}>
-      <Chart options={chartOptions} series={series} type="bar" height={450} width="100%" />
-    </Paper>
+    <Card>
+      <CardContent>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Typography variant="h6" gutterBottom>
+            Top Venues by Publication Count
+          </Typography>
+        </Box>
+        <Chart options={chartOptions} series={series} type="bar" height={400} width="100%" />
+      </CardContent>
+      <ChartDescriptionDialog
+        open={open}
+        onClose={handleClose}
+        description="Identifies venues (journals, conferences) with the highest number of publications, helping researchers find active publication outlets."
+      />
+    </Card>
   );
 };
 

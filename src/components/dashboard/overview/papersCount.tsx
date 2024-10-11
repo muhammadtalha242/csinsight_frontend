@@ -4,21 +4,15 @@ import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import type { SxProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { ArrowDown as ArrowDownIcon } from '@phosphor-icons/react/dist/ssr/ArrowDown';
-import { ArrowUp as ArrowUpIcon } from '@phosphor-icons/react/dist/ssr/ArrowUp';
 import { Receipt as ReceiptIcon } from '@phosphor-icons/react/dist/ssr/Receipt';
 
 export interface BudgetProps {
-  diff?: number;
-  trend: 'up' | 'down';
   sx?: SxProps;
   value: string;
 }
 
-export function PapersCount({ diff, trend, sx, value }: BudgetProps) {
-  const TrendIcon = trend === 'up' ? ArrowUpIcon : ArrowDownIcon;
-  const trendColor = trend === 'up' ? 'var(--mui-palette-success-main)' : 'var(--mui-palette-error-main)';
-
+export function PapersCount({ sx, value }: BudgetProps) {
+ 
   return (
     <Card sx={sx}>
       <CardContent>
@@ -34,19 +28,6 @@ export function PapersCount({ diff, trend, sx, value }: BudgetProps) {
               <ReceiptIcon fontSize="var(--icon-fontSize-lg)" />
             </Avatar>
           </Stack>
-          {diff ? (
-            <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-              <Stack sx={{ alignItems: 'center' }} direction="row" spacing={0.5}>
-                <TrendIcon color={trendColor} fontSize="var(--icon-fontSize-md)" />
-                <Typography color={trendColor} variant="body2">
-                  {diff}%
-                </Typography>
-              </Stack>
-              <Typography color="text.secondary" variant="caption">
-                Since last month
-              </Typography>
-            </Stack>
-          ) : null}
         </Stack>
       </CardContent>
     </Card>
