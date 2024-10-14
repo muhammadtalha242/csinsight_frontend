@@ -3,9 +3,9 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import PublicationAreaChartWithSampleData from '../overview/PublicationAreaChart';
-import FieldsOfStudyChart from './FieldsOfStudyChart';
+// import FieldsOfStudyChart from './FieldsOfStudyChart';
 import TopVenuesChart from './TopVenuesChart';
-import VenueImpactChart from './VenueImpactChart';
+// import VenueImpactChart from './VenueImpactChart';
 import VenueTable from './VenuesTable';
 
 export default function Venues() {
@@ -16,10 +16,10 @@ export default function Venues() {
         <TopVenuesChart />
       </Grid>
       <Grid lg={6} md={6} xs={6}>
-        <VenueImpactChart />
+        {/* <VenueImpactChart /> */}
       </Grid>
       <Grid lg={12} md={10} xs={12}>
-        <FieldsOfStudyChart />
+        {/* <FieldsOfStudyChart /> */}
       </Grid>
       <Grid lg={12} md={10} xs={12}>
         <PublicationAreaChartWithSampleData />
